@@ -1,11 +1,9 @@
 package com.pfly.rest.resources;
 
 import java.io.IOException;
-import java.math.BigInteger;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -22,17 +20,13 @@ import com.pfly.errors.AppException;
 import com.pfly.persistence.entity.Account;
 import com.pfly.persistence.entity.Task;
 import com.pfly.rest.services.AccountService;
-import com.pfly.rest.services.TaskService;
 
 @Component
 @Path("/accounts")
 public class AccountResource {
 
 	@Autowired
-	private AccountService accountService;
-	
-	@Autowired
-	private TaskService taskService;
+	private AccountService accountService;	
 
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON })
@@ -60,7 +54,7 @@ public class AccountResource {
 	@Produces({ MediaType.APPLICATION_JSON + ";charset=UTF-8" })
 	public Response getTasksByAccount(@PathParam("id") Long accountId) throws IOException, AppException {
 		System.out.println("getTasksByAccount");
-		List<Task> tasks = taskService.getTasksByAccount(accountId);
+		List<Task> tasks = accountService.getTasksByAccount(accountId);
 		
 		return Response.status(200).entity(tasks)
 				.header("Access-Control-Allow-Headers", "X-extra-header")

@@ -12,8 +12,7 @@ public interface TaskService {
 	public Task getTaskById(Long id) throws AppException;
 	
 	public List<Task> getTasks() throws AppException;
-	
-	public List<Task> getTasksByAccount(Long accountId) throws AppException;
+
 	
 	public void deleteTask(Task task) throws AppException;
 	

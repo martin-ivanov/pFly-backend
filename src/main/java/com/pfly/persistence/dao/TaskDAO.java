@@ -16,8 +16,8 @@ public interface TaskDAO {
 	
 	public Task getTaskById(Long id);
 	
-	//public List<Task> searchTasksByName(String searchForName);
-	
 	public void deleteTask(Task task);
+
+	public List<Task> getTasksByProject(Long projectId);
 
 }

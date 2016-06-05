@@ -79,13 +79,5 @@ public class TaskServiceImpl implements TaskService {
 		}
 		
 	}
-
-	@Override
-	public List<Task> getTasksByAccount(Long accountId) throws AppException {
-		List<Task> accountTasks = taskDao.getTasksByAccount(accountId);
-		return accountTasks;
-	}
-	
-	
 	
 }

@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 import com.pfly.errors.AppException;
 import com.pfly.persistence.entity.Project;
+import com.pfly.persistence.entity.Task;
 import com.pfly.rest.services.ProjectService;
 
 @Component
@@ -33,8 +34,7 @@ public class ProjectResource {
 		Project project = new Project();
 		project.setName(projectName);
 		project.setDescription(projectDesc);
-		Project createProject = projectService
-				.createProject(project);
+		Project createProject = projectService.createProject(project);
 		if (createProject != null) {
 			return Response.status(Response.Status.CREATED)// 201
 					.entity(createProject).build();
@@ -43,7 +43,6 @@ public class ProjectResource {
 		return Response.status(Response.Status.BAD_REQUEST).build();
 
 	}
-
 
 	@GET
 	@Path("/{id}")
@@ -75,18 +74,14 @@ public class ProjectResource {
 	@GET
 	@Path("/{id}/tasks")
 	@Produces({ MediaType.APPLICATION_JSON + ";charset=UTF-8" })
-	public Response getProjectRecipes(@PathParam("id") Long id)
+	public Response getProjectRecipes(@PathParam("id") Long projectId)
 			throws IOException, AppException {
-		return null;
-//		System.out.println("getAllRecipes");
-//		Project project = projectService.getProjectById(id);
-//		TaskWrapper rw = new TaskWrapper();
-//		if (project != null) {
-//			rw.setList(project.getRecipes());
-//		}
-//		return Response.status(200).entity(rw)
-//				.header("Access-Control-Allow-Headers", "X-extra-header")
-//				.allow("OPTIONS").build();
+		System.out.println("getTasksByProject");
+		List<Task> projectTasks = projectService.getTasksByProjectId(projectId);
+
+		return Response.status(200).entity(projectTasks)
+				.header("Access-Control-Allow-Headers", "X-extra-header")
+				.allow("OPTIONS").build();
 	}
 
 	public void setProjectService(ProjectService projectService) {

@@ -7,15 +7,12 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.pfly.persistence.entity.Account;
 import com.pfly.persistence.entity.Task;
-import com.pfly.util.GcmHelper;
 
 public class TaskDAOImpl implements TaskDAO {
 
@@ -91,5 +88,21 @@ public class TaskDAOImpl implements TaskDAO {
 	@Transactional
 	public void deleteTask(Task task) {
 		entityManager.remove(entityManager.merge(task));
+	}
+
+	@Override
+	public List<Task> getTasksByProject(Long projectId) {
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Task> query = cb.createQuery(Task.class);
+		Root<Task> root = query.from(Task.class);
+		
+		query.where(
+				cb.equal(root.get("project").get("projectId"), cb.parameter(Long.class, "param"))
+		);
+
+		TypedQuery<Task> tq = entityManager.createQuery(query);
+		tq.setParameter("param", projectId);
+
+		return tq.getResultList();
 	}
 }
