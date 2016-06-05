@@ -45,11 +45,15 @@ public class AccountDAOImpl implements AccountDAO {
 	}
 
 	public Account getAccountByDeviceId(String deviceId) {
-		Account account = (Account) entityManager
+//		Account account = (Account);
+		List results = entityManager
 				.createQuery(
 						"SELECT u FROM Account u where u.deviceId = :deviceIdValue")
-				.setParameter("deviceIdValue", deviceId).getResultList().get(0);
-		return account;
+				.setParameter("deviceIdValue", deviceId).getResultList();
+		if (results.isEmpty()){
+			return null;
+		}
+		return (Account) results.get(0);
 	}
 
 	@Override

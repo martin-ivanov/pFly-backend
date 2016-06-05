@@ -28,7 +28,7 @@ public class TaskServiceImpl implements TaskService {
 			Account delegateUser = accountService.getAccountById(task.getDelegatedTo());
 			if (delegateUser != null && delegateUser.getDeviceId() != null) {
 				 System.out.println("send notification");
-				 GcmHelper.sendNotification(delegateUser.getDeviceId() + "", "",
+				 GcmHelper.sendNotification(delegateUser.getDeviceId() + "", "delegate",
 				 task.getTaskId() + "", task.getName(),
 				 task.getDescription());
 			}
@@ -38,7 +38,7 @@ public class TaskServiceImpl implements TaskService {
 			Account transferUser = accountService.getAccountById(task.getTransferedTo());
 			if (transferUser != null && transferUser.getDeviceId() != null) {
 				 System.out.println("send notification");
-				 GcmHelper.sendNotification(transferUser.getDeviceId() + "", "",
+				 GcmHelper.sendNotification(transferUser.getDeviceId() + "", "transfer",
 				 task.getTaskId() + "", task.getName(),
 				 task.getDescription());
 			}
@@ -63,6 +63,27 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public void deleteTask(Task task) throws AppException {
 		taskDao.deleteTask(task);
+	}
+
+	@Override
+	public void declineTask(Long id, String action) throws AppException {
+		Task declinedTask = taskDao.getTaskById(id);
+		if (declinedTask != null){
+			if ("delegate".equalsIgnoreCase(action)){
+				declinedTask.setDelegatedTo(null);
+			}
+			if ("transfer".equalsIgnoreCase(action)){
+				declinedTask.setTransferedTo(null);
+			}
+		taskDao.updateTask(declinedTask);
+		}
+		
+	}
+
+	@Override
+	public List<Task> getTasksByAccount(Long accountId) throws AppException {
+		List<Task> accountTasks = taskDao.getTasksByAccount(accountId);
+		return accountTasks;
 	}
 	
 	

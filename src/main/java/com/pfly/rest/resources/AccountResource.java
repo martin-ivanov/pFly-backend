@@ -9,6 +9,7 @@ import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -19,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.pfly.errors.AppException;
 import com.pfly.persistence.entity.Account;
+import com.pfly.persistence.entity.Task;
 import com.pfly.rest.services.AccountService;
+import com.pfly.rest.services.TaskService;
 
 @Component
 @Path("/accounts")
@@ -27,6 +30,9 @@ public class AccountResource {
 
 	@Autowired
 	private AccountService accountService;
+	
+	@Autowired
+	private TaskService taskService;
 
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON })
@@ -48,13 +54,19 @@ public class AccountResource {
 				.allow("OPTIONS").build();
 
 	}
+	
+	@GET
+	@Path("/{id}/tasks")
+	@Produces({ MediaType.APPLICATION_JSON + ";charset=UTF-8" })
+	public Response getTasksByAccount(@PathParam("id") Long accountId) throws IOException, AppException {
+		System.out.println("getTasksByAccount");
+		List<Task> tasks = taskService.getTasksByAccount(accountId);
+		
+		return Response.status(200).entity(tasks)
+				.header("Access-Control-Allow-Headers", "X-extra-header")
+				.allow("OPTIONS").build();
 
-//	public void setAccountService(AccountService accountService) {
-//		this.accountService = accountService;
-//	}
-//
-//	public AccountService getAccountService() {
-//		return accountService;
-//	}
+	}
+
 
 }

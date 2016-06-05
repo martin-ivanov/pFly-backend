@@ -15,9 +15,10 @@ public class GcmHelper {
 	public static boolean sendNotification(String userGcmId, String type, String id, String title, String message) {
 		Message.Builder messageBuilder = new Message.Builder();
 		messageBuilder.addData("type", type);
-		messageBuilder.addData("id", id);
+		messageBuilder.addData("taskId", id);
 		messageBuilder.addData("title", title);
 		messageBuilder.addData("message", message);
+		messageBuilder.addData("taskActionType", type);
 
 		System.out.println("user:" + userGcmId);
 		

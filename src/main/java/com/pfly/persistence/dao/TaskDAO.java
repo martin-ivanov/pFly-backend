@@ -6,15 +6,17 @@ import com.pfly.persistence.entity.Task;
 
 public interface TaskDAO {
 	
-	public abstract List<Task> getTasks();
+	public  List<Task> getTasks();
 	
-	public abstract Task addTask (Task task);
+	public  List<Task> getTasksByAccount(Long accountId);
 	
-	public abstract void updateTask (Task task);
+	public  Task addTask (Task task);
+	
+	public  void updateTask (Task task);
 	
 	public Task getTaskById(Long id);
 	
-	public List<Task> searchTasksByName(String searchForName);
+	//public List<Task> searchTasksByName(String searchForName);
 	
 	public void deleteTask(Task task);
 

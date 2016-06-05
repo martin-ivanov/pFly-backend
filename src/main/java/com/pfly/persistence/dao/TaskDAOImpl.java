@@ -43,29 +43,36 @@ public class TaskDAOImpl implements TaskDAO {
 		return task;
 	}
 
+	@Transactional
 	public void updateTask(Task task) {
 		entityManager.merge(task);
+		entityManager.flush();
 
 	}
 
 	public Task getTaskById(Long id) {
 		Task task = entityManager.find(Task.class, id);
-		System.out.println("id:" + task.getTaskId());
+//		System.out.println("id:" + task.getTaskId());
 		return task;
 	}
 
-	public List<Task> searchTasksByName(String searchForName) {
+	public List<Task> getTasksByAccount(Long accountId) {
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Task> query = cb.createQuery(Task.class);
 		Root<Task> root = query.from(Task.class);
-		// ParameterExpression<String> nameExpr = cb.parameter(String.class);
-		query.where(cb.like(root.<String> get("name"),
-				cb.parameter(String.class, "param")));
+		
+		query.where(
+				cb.or(
+					cb.equal(root.get("account").get("accountId"), cb.parameter(Long.class, "param0")),
+					cb.equal(root.get("transferedTo"), cb.parameter(Long.class, "param1")),
+					cb.equal(root.get("delegatedTo"), cb.parameter(Long.class, "param2"))
+					)
+				);
 
-		Expression<Long> categoryId = root.get("category");
-		query.groupBy(categoryId);
 		TypedQuery<Task> tq = entityManager.createQuery(query);
-		tq.setParameter("param", "%" + searchForName + "%");
+		tq.setParameter("param0", accountId);
+		tq.setParameter("param1", accountId);
+		tq.setParameter("param2", accountId);
 
 		return tq.getResultList();
 	}
@@ -85,5 +92,4 @@ public class TaskDAOImpl implements TaskDAO {
 	public void deleteTask(Task task) {
 		entityManager.remove(entityManager.merge(task));
 	}
-
 }
