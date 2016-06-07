@@ -1,0 +1,7 @@
+{
+    "creatorId": ACCOUNT_ID_TEMPLATE,
+    "dateCreated": 1462065197000,
+    "description": "Project description",
+    "name": "Project name",
+    "projectId": PROJECT_ID_TEMPLATE
+}
