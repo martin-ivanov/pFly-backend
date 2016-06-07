@@ -1,0 +1,7 @@
+{
+        "accountId": ACCOUNT_ID_TEMPLATE, 
+        "deviceId": "DEVICE_ID_TEMPLATE", 
+        "email": "atanas.dichev@test.com", 
+        "name": "Atanas Dichev", 
+        "userId": "atanass"
+}
