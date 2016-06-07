@@ -3,7 +3,7 @@ package com.pfly.rest.resources;
 import java.io.IOException;
 import java.util.List;
 
-import javax.ws.rs.FormParam;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.pfly.errors.AppException;
 import com.pfly.persistence.entity.Project;
@@ -28,19 +29,12 @@ public class ProjectResource {
 	private ProjectService projectService;
 
 	@POST
+	@Consumes({ MediaType.APPLICATION_JSON })
 	@Produces({ MediaType.APPLICATION_JSON + ";charset=UTF-8" })
-	public Response createProject(@FormParam("name") String projectName,
-			@FormParam("desc") String projectDesc) throws AppException {
-		Project project = new Project();
-		project.setName(projectName);
-		project.setDescription(projectDesc);
-		Project createProject = projectService.createProject(project);
-		if (createProject != null) {
+	public Response createProject(@RequestBody Project project) throws AppException {
+		Project createdProject = projectService.createProject(project);
 			return Response.status(Response.Status.CREATED)// 201
-					.entity(createProject).build();
-		}
-
-		return Response.status(Response.Status.BAD_REQUEST).build();
+					.entity(createdProject).build();
 
 	}
 

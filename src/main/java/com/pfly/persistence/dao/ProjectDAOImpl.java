@@ -26,7 +26,7 @@ public class ProjectDAOImpl implements ProjectDAO {
 	@Transactional
 	public Project addProject(Project project) {
 		// System.out.println("adding project " + project.getFullName());
-		entityManager.persist(project);
+		entityManager.merge(project);
 		entityManager.flush();
 		return project;
 	}

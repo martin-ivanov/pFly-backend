@@ -17,5 +17,9 @@ public interface TaskService {
 	public void deleteTask(Task task) throws AppException;
 	
 	public void declineTask(Long id, String action) throws AppException;
+
+	public List<Task> getTasksByProject(Long projectId);
+
+	public List<Task> getTasksByAccount(Long accountId);
 		
 }

@@ -16,13 +16,13 @@ public class ProjectServiceImpl implements ProjectService {
 	ProjectDAO projectDao;
 	
 	@Autowired
-	TaskDAO taskDao;
+	TaskService taskService;
 	
 	@Override
 	public Project createProject(Project project)
 			throws AppException {
-		// TODO Auto-generated method stub
-		return null;
+		Project createdProject = projectDao.addProject(project);
+		return createdProject;
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class ProjectServiceImpl implements ProjectService {
 
 	@Override
 	public List<Task> getTasksByProjectId(Long projectId) {
-		List<Task> projectTasks = taskDao.getTasksByProject(projectId);
+		List<Task> projectTasks = taskService.getTasksByProject(projectId);
 		return projectTasks;
 	}
 }

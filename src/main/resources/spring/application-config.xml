@@ -18,8 +18,8 @@
 	<bean id="objectMapper" class="org.codehaus.jackson.map.ObjectMapper" />
 
 	<bean id="userDao" class="com.pfly.persistence.dao.AccountDAOImpl" />
-	<bean id="categoryDao" class="com.pfly.persistence.dao.ProjectDAOImpl" />
-	<bean id="recipeDao" class="com.pfly.persistence.dao.TaskDAOImpl" />
+	<bean id="projectDao" class="com.pfly.persistence.dao.ProjectDAOImpl" />
+	<bean id="taskDao" class="com.pfly.persistence.dao.TaskDAOImpl" />
 
 	<bean id="accountService" class="com.pfly.rest.services.AccountServiceImpl" />
 	<bean id="accountResource" class="com.pfly.rest.resources.AccountResource" />
