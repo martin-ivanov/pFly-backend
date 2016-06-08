@@ -9,6 +9,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -52,9 +53,9 @@ public class AccountResource {
 	@GET
 	@Path("/{id}/tasks")
 	@Produces({ MediaType.APPLICATION_JSON + ";charset=UTF-8" })
-	public Response getTasksByAccount(@PathParam("id") Long accountId) throws IOException, AppException {
+	public Response getTasksByAccount(@PathParam("id") Long accountId, @QueryParam("getClosedTasks") Boolean getClosedTasks) throws IOException, AppException {
 		System.out.println("getTasksByAccount");
-		List<Task> tasks = accountService.getTasksByAccount(accountId);
+		List<Task> tasks = accountService.getTasksByAccount(accountId, getClosedTasks);
 		
 		return Response.status(200).entity(tasks)
 				.header("Access-Control-Allow-Headers", "X-extra-header")

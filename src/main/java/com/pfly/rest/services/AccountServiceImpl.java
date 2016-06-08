@@ -34,8 +34,8 @@ public class AccountServiceImpl implements AccountService {
 	}
 	
 	@Override
-	public List<Task> getTasksByAccount(Long accountId) throws AppException {
-		List<Task> accountTasks = taskService.getTasksByAccount(accountId);
+	public List<Task> getTasksByAccount(Long accountId, Boolean getClosedTasks) throws AppException {
+		List<Task> accountTasks = taskService.getTasksByAccount(accountId, getClosedTasks);
 		return accountTasks;
 	}
 	

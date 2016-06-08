@@ -14,6 +14,6 @@ public interface AccountService {
 	
 	public Account getAccountById(Long accountId) throws AppException;	
 
-	public List<Task> getTasksByAccount(Long accountId) throws AppException;
+	public List<Task> getTasksByAccount(Long accountId, Boolean getClosedTasks) throws AppException;
 
 }

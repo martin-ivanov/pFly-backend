@@ -86,8 +86,10 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-	public List<Task> getTasksByAccount(Long accountId) {
-		return taskDao.getTasksByAccount(accountId);
+	public List<Task> getTasksByAccount(Long accountId, Boolean getClosedTasks) {
+		return taskDao.getTasksByAccount(accountId, getClosedTasks);
 	}
+
+
 	
 }

@@ -20,6 +20,6 @@ public interface TaskService {
 
 	public List<Task> getTasksByProject(Long projectId);
 
-	public List<Task> getTasksByAccount(Long accountId);
+	public List<Task> getTasksByAccount(Long accountId, Boolean getClosedTasks);
 		
 }

@@ -8,7 +8,7 @@ public interface TaskDAO {
 	
 	public  List<Task> getTasks();
 	
-	public  List<Task> getTasksByAccount(Long accountId);
+	public  List<Task> getTasksByAccount(Long accountId, Boolean getClosedTasks);
 	
 	public  Task addTask (Task task);
 	
