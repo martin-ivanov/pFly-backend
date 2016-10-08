@@ -13,6 +13,8 @@ public interface AccountDAO {
 	public abstract void updateAccount (Account account);
 	
 	public Account getAccountById(Long id);
+	
+	public Account getAccountByName(String name);
 
 	public Account getAccountByCredentials(String accountname, String password);
 }

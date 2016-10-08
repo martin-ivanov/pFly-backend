@@ -25,7 +25,7 @@ public class AccountDAOImpl implements AccountDAO {
 	@Transactional
 	public Account addAccount(Account account) {
 		System.out.println("in addAccount method in DAO");
-		Account returnAccount = getAccountByDeviceId(account.getDeviceId());
+		Account returnAccount = getAccountByDeviceId(account.getDeviceId(), account.getEmail());
 		if (returnAccount == null) {
 			returnAccount = entityManager.merge(account);
 			entityManager.flush();
@@ -44,26 +44,42 @@ public class AccountDAOImpl implements AccountDAO {
 		return account;
 	}
 
-	public Account getAccountByDeviceId(String deviceId) {
-//		Account account = (Account);
-		List results = entityManager
+	public Account getAccountByDeviceId(String deviceId, String email) {
+		List<Account> results = entityManager
 				.createQuery(
-						"SELECT u FROM Account u where u.deviceId = :deviceIdValue")
-				.setParameter("deviceIdValue", deviceId).getResultList();
-		if (results.isEmpty()){
-			return null;
+						"SELECT u FROM Account u where u.deviceId = :deviceIdValue and u.email = :emailValue", Account.class)
+				.setParameter("deviceIdValue", deviceId)
+				.setParameter("emailValue", email)
+				.getResultList();
+		if (!results.isEmpty()) {
+			return results.get(0);
 		}
-		return (Account) results.get(0);
+		return null;
 	}
 
 	@Override
 	public Account getAccountByCredentials(String accountname, String password) {
 		List<Account> accounts = entityManager
 				.createQuery(
-						"SELECT u FROM Account u where u.accountName = :accountNameValue and u.password=:passwordValue",
+						"SELECT u FROM Account u where u.accountName = :accountNameValue and u.acc_password=:passwordValue",
 						Account.class)
 				.setParameter("accountNameValue", accountname)
-				.setParameter("passwordValue", password).getResultList();
+				.setParameter("passwordValue", password)
+				.getResultList();
+		if (!accounts.isEmpty()) {
+			return accounts.get(0);
+		}
+		return null;
+	}
+
+	@Override
+	public Account getAccountByName(String name) {
+		List<Account> accounts = entityManager
+				.createQuery(
+						"SELECT u FROM Account u where u.name = :accountNameValue",
+						Account.class)
+				.setParameter("accountNameValue", name)
+				.getResultList();
 		if (!accounts.isEmpty()) {
 			return accounts.get(0);
 		}

@@ -1,7 +1,6 @@
 package com.pfly.persistence.entity;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -14,18 +13,11 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
-/**
- * The persistent class for the accounts database table.
- * 
- */
 @Entity
-@Table(name="accounts")
-@NamedQuery(name="Account.findAll", query="SELECT a FROM Account a")
-//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@userId")
+@Table(name = "accounts")
+@NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a")
 public class Account implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Long accountId;
@@ -33,15 +25,15 @@ public class Account implements Serializable {
 	private String email;
 	private String name;
 	private String userId;
+	private String password;
 	private List<Task> tasks;
 
 	public Account() {
 	}
 
-
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="account_id", unique=true, nullable=false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "account_id", unique = true, nullable = false)
 	public Long getAccountId() {
 		return this.accountId;
 	}
@@ -50,8 +42,7 @@ public class Account implements Serializable {
 		this.accountId = accountId;
 	}
 
-
-	@Column(name="device_id", nullable=false)
+	@Column(name = "device_id", nullable = false)
 	public String getDeviceId() {
 		return this.deviceId;
 	}
@@ -60,8 +51,7 @@ public class Account implements Serializable {
 		this.deviceId = deviceId;
 	}
 
-
-	@Column(nullable=false, length=100)
+	@Column(nullable = false, length = 100)
 	public String getEmail() {
 		return this.email;
 	}
@@ -70,8 +60,7 @@ public class Account implements Serializable {
 		this.email = email;
 	}
 
-
-	@Column(nullable=false, length=100)
+	@Column(nullable = false, length = 100)
 	public String getName() {
 		return this.name;
 	}
@@ -80,8 +69,7 @@ public class Account implements Serializable {
 		this.name = name;
 	}
 
-
-	@Column(name="user_id", nullable=false)
+	@Column(name = "user_id", nullable = false)
 	public String getUserId() {
 		return this.userId;
 	}
@@ -89,11 +77,18 @@ public class Account implements Serializable {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+	
+	@Column(name = "acc_password")
+	public String getPassword() {
+		return this.password;
+	}
 
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-	//bi-directional many-to-one association to Task
-	@OneToMany(mappedBy="account", fetch=FetchType.EAGER)
-//	@JsonBackReference
+	// bi-directional many-to-one association to Task
+	@OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
 	@JsonIgnore
 	public List<Task> getTasks() {
 		return this.tasks;
@@ -116,5 +111,4 @@ public class Account implements Serializable {
 
 		return task;
 	}
-
 }

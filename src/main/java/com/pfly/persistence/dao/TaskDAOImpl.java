@@ -38,7 +38,6 @@ public class TaskDAOImpl implements TaskDAO {
 
 	@Transactional
 	public Task addTask(Task task) {
-
 		entityManager.merge(task);
 		entityManager.flush();
 		return task;
