@@ -13,6 +13,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -89,6 +92,7 @@ public class Account implements Serializable {
 
 	// bi-directional many-to-one association to Task
 	@OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SUBSELECT)
 	@JsonIgnore
 	public List<Task> getTasks() {
 		return this.tasks;

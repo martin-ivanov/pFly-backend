@@ -16,6 +16,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
@@ -95,7 +98,7 @@ public class Project implements Serializable {
 
 	//bi-directional many-to-one association to Task
 	@OneToMany(mappedBy="project", fetch=FetchType.EAGER)
-//	@JsonBackReference
+	@Fetch(FetchMode.SUBSELECT)
 	@JsonIgnore
 	public List<Task> getTasks() {
 		return this.tasks;

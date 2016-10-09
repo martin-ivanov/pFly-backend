@@ -54,20 +54,20 @@
 		<property name="dataSource" ref="pflyDS" />
 		<property name="packagesToScan" value="com.outlink.*" />
 
-		<property name="jpaVendorAdapter">
+<!-- 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<property name="showSql" value="true" />
 				<property name="databasePlatform" value="org.hibernate.dialect.MySQL5Dialect" />
 			</bean>
-		</property>
+		</property> -->
 	</bean>
 
 	<bean name="pflyDS"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.postgresql.Driver" />
-		<property name="url" value="jdbc:mysql://ec2-54-235-207-226.compute-1.amazonaws.com:5432/defmssap6idvj0" />
-		<property name="username" value="kfryvmurpdehgg" />
-		<property name="password" value="eyEgcyleXA5fbshL1KylPkhIUA" />
+		<property name="url" value="jdbc:postgresql://ec2-184-73-202-229.compute-1.amazonaws.com:5432/d4gd6ciaoe5aoa?sslfactory=org.postgresql.ssl.NonValidatingFactory&amp;ssl=true" />
+		<property name="username" value="qrfwpojjvywdhy" />
+		<property name="password" value="xtk6fvxBCyfPd58U2xzQ5LFFrC" />
 	</bean>
 
 
