@@ -93,11 +93,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
             .requiresChannel()
 //                .antMatchers("/**").requires(ChannelDecisionManagerImpl.ANY_CHANNEL)
 //                .antMatchers(securedUrls).requiresSecure()
-                .anyRequest().requiresSecure()
+//                .anyRequest().requiresSecure()
                 .and()
-             .portMapper()			//maps the port 8080(http) to 8443(https)
-				.http(8080).mapsTo(8443)
-				.and()
+//             .portMapper()			//maps the port 8080(http) to 8443(https)
+//				.http(8080).mapsTo(8443)
+//				.and()
             .addFilterBefore(authenticationTokenFilterBean(),
 				UsernamePasswordAuthenticationFilter.class);
 	}

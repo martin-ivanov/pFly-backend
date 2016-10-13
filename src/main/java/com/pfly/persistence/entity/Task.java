@@ -61,7 +61,7 @@ public class Task implements Serializable {
 
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="task_id", unique=true, nullable=false)
 	public Long getTaskId() {
 		return this.taskId;

@@ -15,6 +15,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -35,7 +37,8 @@ public class Account implements Serializable {
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@Generated(GenerationTime.INSERT)
 	@Column(name = "account_id", unique = true, nullable = false)
 	public Long getAccountId() {
 		return this.accountId;
@@ -72,7 +75,7 @@ public class Account implements Serializable {
 		this.name = name;
 	}
 
-	@Column(name = "user_id", nullable = false)
+	@Column(name = "user_id", nullable = true)
 	public String getUserId() {
 		return this.userId;
 	}
@@ -81,7 +84,7 @@ public class Account implements Serializable {
 		this.userId = userId;
 	}
 	
-	@Column(name = "acc_password")
+	@Column(name = "acc_password", length = 100)
 	public String getPassword() {
 		return this.password;
 	}

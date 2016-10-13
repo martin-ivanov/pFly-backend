@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+//import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TokenUtils {
 
-	private final Logger logger = Logger.getLogger(this.getClass());
+//	private final Logger logger = Logger.getLogger(this.getClass());
 
 	@Value("${cerberus.token.secret}")
 	private String secret;

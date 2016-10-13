@@ -24,8 +24,6 @@
 		</property>
 	</bean>
 
-	<bean id="objectMapper" class="org.codehaus.jackson.map.ObjectMapper" />
-
 	<bean id="userDao" class="com.pfly.persistence.dao.AccountDAOImpl" />
 	<bean id="projectDao" class="com.pfly.persistence.dao.ProjectDAOImpl" />
 	<bean id="taskDao" class="com.pfly.persistence.dao.TaskDAOImpl" />
@@ -52,7 +50,7 @@
 		<property name="persistenceXmlLocation" value="classpath:config/persistence.xml" />
 		<property name="persistenceUnitName" value="pflyEntityManager" />
 		<property name="dataSource" ref="pflyDS" />
-		<property name="packagesToScan" value="com.outlink.*" />
+		<property name="packagesToScan" value="com.pfly.persistence.*" />
 
 <!-- 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
@@ -69,15 +67,5 @@
 		<property name="username" value="qrfwpojjvywdhy" />
 		<property name="password" value="xtk6fvxBCyfPd58U2xzQ5LFFrC" />
 	</bean>
-
-
-<!-- 	<bean name="tokenUtils" class="com.pfly.rest.security.TokenUtils">
-		<property name="secret" value="${cerberus.token.secret}" />
-		<property name="expiration" value="${cerberus.token.expiration}" />
-	</bean> -->
-	
-<!-- 		<bean name="authenticationTokenFilter" class="com.pfly.rest.security.AuthenticationTokenFilter" scope="singleton">
-		<property name="tokenHeader" value="${cerberus.token.header}" />
-	</bean> -->
 	
 </beans>

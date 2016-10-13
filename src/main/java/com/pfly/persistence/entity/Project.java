@@ -44,7 +44,7 @@ public class Project implements Serializable {
 
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="project_id", unique=true, nullable=false)
 	public Long getProjectId() {
 		return this.projectId;
