@@ -15,8 +15,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 
 /**
  * The persistent class for the task database table.
@@ -46,9 +44,9 @@ public class Task implements Serializable {
 	private Date lastResponsibleMoment;
 
 	private Integer status;
-	private String recommendedAction;
+	private Integer recommendedAction;
 	
-	private String takenAction;
+	private Integer takenAction;
 	private Long transferedTo;
 	private Long delegatedTo;
 	private Long dependOn;
@@ -229,11 +227,11 @@ public class Task implements Serializable {
 
 
 	@Column(name="recommended_action", length=500)
-	public String getRecommendedAction() {
+	public Integer getRecommendedAction() {
 		return this.recommendedAction;
 	}
 
-	public void setRecommendedAction(String recommendedAction) {
+	public void setRecommendedAction(Integer recommendedAction) {
 		this.recommendedAction = recommendedAction;
 	}
 
@@ -257,11 +255,11 @@ public class Task implements Serializable {
 
 
 	@Column(name="taken_action", length=500)
-	public String getTakenAction() {
+	public Integer getTakenAction() {
 		return this.takenAction;
 	}
 
-	public void setTakenAction(String takenAction) {
+	public void setTakenAction(Integer takenAction) {
 		this.takenAction = takenAction;
 	}
 

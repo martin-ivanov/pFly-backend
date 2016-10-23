@@ -15,8 +15,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -28,7 +26,6 @@ import com.pfly.rest.services.TaskService;
 
 @Component
 @Path("/tasks")
-@PreAuthorize("@securityService.hasProtectedAccess()")
 public class TaskResource {
 
 	@Autowired
